@@ -10,12 +10,14 @@ class App extends React.Component {
         super();
         this.state = {
             fishes: {},
-            orders: {}
+            order: {}
         }
         this.addFish = this.addFish.bind(this);
         this.loadSampleFishes = this.loadSampleFishes.bind(this);
+        this.addToOrder = this.addToOrder.bind(this);
     }
     // custom methods
+    // --- FISH ---
     addFish(fish){
         // take copy of existing state
         const fishes = { ...this.state.fishes };
@@ -27,6 +29,12 @@ class App extends React.Component {
     loadSampleFishes(){
         this.setState({ fishes: sampleFishes });
     }
+    // --- ORDER ---
+    addToOrder(key){
+        const order = { ...this.state.order};
+        order[key] = order[key] + 1 || 1;
+        this.setState({ order });
+    }
     // render method -----------------------------------------
     render() {
         return (
@@ -34,7 +42,12 @@ class App extends React.Component {
                 <div className="menu">
                     <Header tagline="fresh seefood market" />
                     <ul className="fishes">
-                        {Object.keys(this.state.fishes).map(key => <Fish key={ key } details={ this.state.fishes[key] } />)}
+                        {Object.keys(this.state.fishes).map(key => <Fish 
+                                                                    key={ key } 
+                                                                    index = { key }
+                                                                    addToOrder={ this.addToOrder } 
+                                                                    details={ this.state.fishes[key] } 
+                                                                    />)}
                     </ul>
                 </div>
                 <Order />
