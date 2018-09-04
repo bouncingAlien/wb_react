@@ -14,7 +14,7 @@ class Order extends React.Component {
         if(!fish) return null;
         if(!isAvailable) {
             return <li key={key}>
-                Sorry { fish ? fish.name : 'fish' } is no longe available! 
+                Sorry { fish ? fish.name : 'fish' } is no longer available! 
             </li>
         }
         return <li key={key}>
