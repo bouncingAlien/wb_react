@@ -7,7 +7,11 @@ class Order extends React.Component {
         const fish = this.props.fishes[key];
         // fish count
         const count = this.props.order[key];
-        const isAvailable = fish.status === 'available';
+        const isAvailable = fish && fish.status === 'available';
+        // prevents error that comes as result of loading order from local storage is
+        // faster than getting fishes from database, so there are no fishes in state.
+        // do not display component until you get fishes from database
+        if(!fish) return null;
         if(!isAvailable) {
             return <li key={key}>
                 Sorry { fish ? fish.name : 'fish' } is no longe available! 
