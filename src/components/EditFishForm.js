@@ -4,6 +4,7 @@ class EditFishForm extends React.Component {
     constructor(){
         super();
         this.handleChange = this.handleChange.bind(this);
+        this.removeFish = this.removeFish.bind(this);
     }
     handleChange(e) {
         const updatedFish = {
@@ -11,6 +12,9 @@ class EditFishForm extends React.Component {
             [e.currentTarget.name]: e.currentTarget.value
         };
         this.props.updateFish(this.props.index, updatedFish);
+    }
+    removeFish(){
+        this.props.deleteFish(this.props.index);
     }
     render() {
         return (
@@ -23,6 +27,7 @@ class EditFishForm extends React.Component {
                 </select>
                 <textarea name="desc" onChange={this.handleChange} value={this.props.fish.desc} />
                 <input type="text" name="image" onChange={this.handleChange} value={this.props.fish.image} />
+                <button onClick={this.removeFish}>Remove Fish</button>
             </div>
         )
     }
